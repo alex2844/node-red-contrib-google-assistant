@@ -8,7 +8,8 @@ module.exports = RED => {
 			settings.getClient().then(client => client.send(request))
 			.then(({ payload, request }) => this.send({
 				...(topic && { topic }),
-				payload, request
+				...(request && { request }),
+				payload
 			}))
 			.catch(({ message, code }) => this.error(message, { code }));
 		});
