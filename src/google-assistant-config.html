@@ -1,0 +1,32 @@
+<script type="text/markdown" data-help-name="google-assistant-config">
+Configuration node.
+</script>
+<script type="text/html" data-template-name="google-assistant-config">
+	<div class="form-row">
+		<label for="node-config-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-config-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-keyFilePath"><i class="fa fa-folder"></i> Keys Oauth</label>
+		<input type="text" id="node-config-input-keyFilePath">
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-savedTokensPath"><i class="fa fa-folder"></i> Tokens Path</label>
+		<input type="text" id="node-config-input-savedTokensPath">
+	</div>
+</script>
+<script type="text/javascript">
+	RED.nodes.registerType('google-assistant-config', {
+		category: 'config',
+		defaults: {
+			name: { value: '' }
+		},
+		credentials: {
+			keyFilePath: { type: 'text' },
+			savedTokensPath: { type: 'text' }
+		},
+		label: function() {
+			return this.name || 'Google assistant';
+		}
+	});
+</script>
