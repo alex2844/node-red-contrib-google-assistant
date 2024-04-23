@@ -7,7 +7,9 @@ Send request to google assistant
 ### Outputs
 
 : payload (string) : The status of the device after executing a command received.
+
 : *topic* (string) : Passed from input data
+
 : *request* (object) : Similar queries
 
 ### Details
