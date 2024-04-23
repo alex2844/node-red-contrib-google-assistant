@@ -1,5 +1,5 @@
-module.exports = RED => {
-	const GoogleAssistant = require('./index.js');
+module.exports = async function(RED) {
+	const { GoogleAssistant } = await import('./index.mjs');
 	function Config(config) {
 		RED.nodes.createNode(this, config);
 		this.getClient = async function() {
