@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const GoogleAssistantApi = require('google-assistant');
+import GoogleAssistantApi from 'google-assistant';
 
-class GoogleAssistant {
+export class GoogleAssistant {
 	constructor(credentials) {
 		this.client = new GoogleAssistantApi(credentials);
 		this.ready = new Promise(res => this.client.on('ready', () => res()));
@@ -26,7 +26,7 @@ class GoogleAssistant {
 					this.done.resolve(this.response);
 			});
 		});
-	}
+	};
 	parseHtml(obj) {
 		return (
 			obj.data.toString()
@@ -39,7 +39,7 @@ class GoogleAssistant {
 			.replace(/<div>\s+<\/div>/g, '')
 			.replace(/>(\s+)</g, '>\n$1<')
 		);
-	}
+	};
 	parseText(html) {
 		if (html.indexOf('<div class="popout-content" id="assistant-card-content">') > -1)
 			return (
@@ -49,7 +49,7 @@ class GoogleAssistant {
 				.replace(/(\<(\/?[^>]+)>)/g, '').trim()
 			);
 		return null;
-	}
+	};
 	parseRequest(html) {
 		if (html.indexOf('<div id="assistant-scroll-bar">') > -1)
 			return (
@@ -58,7 +58,7 @@ class GoogleAssistant {
 				.split('</div>')[0]
 				.replace(/<button.*?>(.*?)<\/button>/g, '$1,').trim().split(',').slice(0, -1)
 			);
-	}
+	};
 	send(request) {
 		this.response = {};
 		this.request = request;
@@ -79,7 +79,7 @@ class GoogleAssistant {
 				});
 			});
 		});
-	}
+	};
 }
 
-module.exports = GoogleAssistant;
+export default GoogleAssistant;
