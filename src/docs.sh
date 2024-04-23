@@ -15,11 +15,6 @@ convert() {
 			echo -e "## ${dest_file}\n\n" > "${md}";
 			cat "${html}" >> "${md}";
 			sed -i '4d;$d' "${md}";
-			if [ "${__filename}" == 'pre-commit' ]; then
-				git add "${md}";
-				commit=$(git log -1 --pretty=format:'%B');
-				git commit -m "$commit\n\nCopied and transformed: ${md}";
-			fi
 		fi
 	fi
 }
