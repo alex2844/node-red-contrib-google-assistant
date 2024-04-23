@@ -1,0 +1,21 @@
+## google-assistant-request
+
+
+Send request to google assistant
+
+
+### Outputs
+
+: payload (string) : The status of the device after executing a command received.
+: *topic* (string) : Passed from input data
+: *request* (object) : Similar queries
+
+### Details
+
+`Config` - Configuration node.
+
+`Name` - Name node.
+
+`Request` - Request that will be sent.
+
+`Topic` - It will be added to the output.
