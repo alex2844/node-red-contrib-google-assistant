@@ -13,10 +13,19 @@ export class GoogleAssistant {
 					this.response.payload = text;
 			})
 			.on('screen-data', screen => {
-				const html = this.parseHtml(screen);
-				if (!this.response.payload)
-					this.response.payload = this.parseText(html);
-				this.response.request = this.parseRequest(html);
+				const data = screen.data.toString();
+				if (this.format === 'screen')
+					this.response.payload = data;
+				else{
+					const html = this.parseHtml(data);
+					if (this.format === 'html')
+						this.response.payload = html;
+					else{
+						if (!this.response.payload)
+							this.response.payload = this.parseText(html);
+						this.response.request = this.parseRequest(html);
+					}
+				}
 			})
 			.on('ended', (error, continueConversation) => {
 				if (error) {
@@ -27,9 +36,9 @@ export class GoogleAssistant {
 			});
 		});
 	};
-	parseHtml(obj) {
+	parseHtml(data) {
 		return (
-			obj.data.toString()
+			data
 			.replace(/ style=".*?"/g, '')
 			.replace(/<svg.*?<\/svg>/gs, '')
 			.replace(/<img .*?>/gs, '')
@@ -59,7 +68,8 @@ export class GoogleAssistant {
 				.replace(/<button.*?>(.*?)<\/button>/g, '$1,').trim().split(',').slice(0, -1)
 			);
 	};
-	send(request) {
+	send(request, format = 'text') {
+		this.format = format;
 		this.response = {};
 		this.request = request;
 		if (!request)

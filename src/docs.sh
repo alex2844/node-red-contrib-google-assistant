@@ -4,9 +4,9 @@ __filename="$(basename "$0")";
 
 convert() {
 	html="$(readlink -f "$1")";
-	if [[ "${html}" =~ src/locales/ ]]; then
+	if [[ "${html}" =~ src/nodes/locales/ ]]; then
 		if [[ "${html}" =~ .html$ ]]; then
-			md=$(echo "${html}" | sed 's|\(.*\)src/locales/\(.*\)\.html$|\1docs/\2.md|');
+			md=$(echo "${html}" | sed 's|\(.*\)src/nodes/locales/\(.*\)\.html$|\1docs/\2.md|');
 			dest_file="$(basename "$md" .md)";
 			dest_dir="$(dirname "${md}")";
 			if [ ! -d "${dest_dir}" ]; then
@@ -26,8 +26,14 @@ if [ "${__filename}" == 'pre-commit' ]; then
 	done
 else
 	if [ "$1" == "init" ]; then
-		ln -s "$(readlink -f "$0")" .git/hooks/pre-commit;
+		echo ln -s "$(readlink -f "$0")" .git/hooks/pre-commit;
 	else
-		convert "$1";
+		if [ -z "$1" ]; then
+			for file in "src/nodes/locales"/**/*.html; do
+				convert "$file";
+			done
+		else
+		 	convert "$1";
+		fi
 	fi
 fi

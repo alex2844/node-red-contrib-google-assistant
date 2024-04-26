@@ -4,13 +4,22 @@
 	"main": "src/index.mjs",
 	"scripts": {
 		"docs": "src/docs.sh",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"ext": "vite build",
+		"dev:ext": "vite build --watch"
 	},
-	"node-red" : {
+	"node-red": {
 		"nodes": {
-			"google-assistant-request": "src/google-assistant-request.js",
-			"google-assistant-config": "src/google-assistant-config.js"
+			"google-assistant-config": "src/nodes/google-assistant-config.js",
+			"google-assistant-request": "src/nodes/google-assistant-request.js",
+			"google-assistant-server": "src/nodes/google-assistant-server.js"
 		}
+	},
+	"devDependencies": {
+		"@mdi/font": "^7.4.47",
+		"@vitejs/plugin-vue": "^4.5.0",
+		"vite": "^5.0.12",
+		"vite-plugin-static-copy": "^1.0.3",
+		"vuetify": "^3.5.14"
 	},
 	"dependencies": {
 		"google-assistant": "^0.7.0"
