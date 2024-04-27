@@ -1,0 +1,29 @@
+{
+	"manifest_version": 3,
+	"version": "1.0",
+	"name": "Google Assistant",
+	"icons": {
+		"128": "google-assistant.png"
+	},
+	"action": {
+		"default_title": "Open Google Assistant"
+	},
+	"commands": {
+		"open_extension_window": {
+			"suggested_key": {
+				"default": "Alt+A"
+			},
+			"description": "Open extension window"
+		}
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": [
+		"storage", "activeTab", "declarativeNetRequest", "tts"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	]
+}
+

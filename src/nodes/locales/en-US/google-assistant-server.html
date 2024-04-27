@@ -1,0 +1,38 @@
+<script type="text/markdown" data-help-name="google-assistant-server">
+API Server for google assistant
+
+
+### Inputs
+
+: request (string) : The query sent to Google Assistant.
+
+: *format* (text|json|html|screen) : Passed from input data.
+
+### Outputs
+
+: ip (string) : The IP address from which the request to the API originated.
+
+: url (string) : The full URL address.
+
+: request (string) : The query sent to Google Assistant.
+
+: format (string) : The format in which the data was requested.
+
+: result.request (object) : Similar queries.
+
+: result.payload (string) : The response received from Google Assistant.
+
+### Details
+
+`Config` - Configuration node.
+
+`Name` - Name node.
+
+`Url` - The path at which the API will be launched.
+
+`Arg` - The argument through which the request will be passed to Google Assistant.
+
+`Username` - Username for accessing the API.
+
+`Password` - Password for accessing the API.
+</script>

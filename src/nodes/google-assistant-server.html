@@ -1,0 +1,74 @@
+<script type="text/html" data-template-name="google-assistant-server">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+	<fieldset>
+		<legend>API</legend>
+		<div class="form-row">
+			<label for="node-input-url"><i class="fa fa-globe"></i> Url</label>
+			<div style="width: 70%; display: inline-flex;">
+				<input type="text" id="node-input-url" style="flex-grow: 1;"/>
+				<a id="node-input-lookup-url" class="red-ui-button" style="margin-left: 10px;"><i class="fa fa-external-link"></i></a>
+			</div>
+		</div>
+		<div class="form-row">
+			<label for="node-input-arg"><i class="fa fa-code-fork"></i> Argument</label>
+			<input type="text" id="node-input-arg">
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>API Authentication</legend>
+		<div class="form-row">
+			<label for="node-input-username"><i class="fa fa-user"></i> Username</label>
+			<input type="text" id="node-input-username">
+		</div>
+		<div class="form-row">
+			<label for="node-input-password"><i class="fa fa-key"></i> Password</label>
+			<input type="password" id="node-input-password">
+		</div>
+	</fieldset>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('google-assistant-server', {
+	category: 'Google_Assistant',
+	defaults: {
+		settings: { value: null, required: true, type: 'google-assistant-config' },
+		name: { value: '' },
+		url: { value: '/google-assistant/', required: true },
+		arg: { value: 'request' }
+	},
+	credentials: {
+		username: {
+			type: 'text',
+			validate: function(val) {
+				return (!$('#node-input-username').val() === !$('#node-input-password').val());
+			}
+		},
+		password: {
+			type: 'password',
+			validate: function(val) {
+				return (!$('#node-input-username').val() === !$('#node-input-password').val());
+			}
+		}
+	},
+	icon: 'google-assistant.png',
+	outputs: 1,
+	color: '#3FADB5',
+	paletteLabel: 'Server',
+	label: function() {
+		return this.name || 'Server';
+	},
+	oneditprepare: function() {
+		$('#node-input-lookup-url').on('click', () => {
+			const url = $('#node-input-url').val().slice(1);
+			if (url)
+				window.open(url, '_blank');
+		});
+	}
+});
+</script>
