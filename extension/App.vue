@@ -68,10 +68,7 @@
 	</v-app>
 </template>
 <script>
-import { VFab } from 'vuetify/labs/VFab';
-import { VConfirmEdit } from 'vuetify/labs/VConfirmEdit';
 export default {
-	components: { VFab, VConfirmEdit },
 	data() {
 		return {
 			assistant: {

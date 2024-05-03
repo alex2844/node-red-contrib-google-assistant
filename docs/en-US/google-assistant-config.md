@@ -8,9 +8,11 @@ Configuration node.
 
 `Name` - Name node.
 
-`keyFilePath` - Path of the JSON file that you have after following the OAuth flow.
+`client_id` - ID application
 
-`savedTokensPath` - Path where you would like your tokens saved after you give your app permission to access your account.
+`client_secret` - Secret key for application
+
+`redirect_url` - Callback redirect
 
 
 ### References

@@ -1,0 +1,65 @@
+<script type="text/html" data-template-name="google-assistant-config">
+	<div class="form-row">
+		<label for="node-config-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-config-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-client_id"><i class="fa fa-user"></i> Client ID</label>
+		<input type="text" id="node-config-input-client_id">
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-client_secret"><i class="fa fa-key"></i> Client Secret</label>
+		<input type="password" id="node-config-input-client_secret">
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-redirect_url"><i class="fa fa-fw fa-list"></i> Redirect</label>
+		<input type="text" id="node-config-input-redirect_url">
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('google-assistant-config', {
+	category: 'config',
+	defaults: {
+		name: { value: '' }
+	},
+	credentials: {
+		client_id: {
+			type: 'text',
+			required: true
+		},
+		client_secret: {
+			type: 'password',
+			required: true
+		},
+		redirect_url: {
+			type: 'text',
+			required: true
+		}
+	},
+	label: function() {
+		return this.name || 'Google assistant';
+	},
+	oneditprepare: function() {
+		$('#node-config-input-client_id').on('input', () => {
+			const client_secret = $('#node-config-input-client_secret').val();
+			if (client_secret === '__PWRD__')
+				$('#node-config-input-client_secret').val('');
+		});
+		$('#node-config-input-redirect_url').val(() => {
+			let pathname = document.location.pathname;
+			if (pathname.slice(-1) != '/')
+				pathname += '/';
+			return location.protocol+'//'+location.hostname+(location.port?':'+location.port:'')+pathname+'google-assistant/callback';
+		});
+	},
+	oneditsave: function() {
+		const client_id = $('#node-config-input-client_id').val();
+		const client_secret = $('#node-config-input-client_secret').val();
+		const redirect_url = $('#node-config-input-redirect_url').val();
+		if (client_id && client_secret && (client_secret !== '__PWRD__')) {
+			const url = 'google-assistant/auth?id='+this.id+'&client_id='+client_id+'&client_secret='+client_secret+'&redirect_url='+encodeURIComponent(redirect_url);
+			window.open(url, '_blank');
+		}
+	}
+});
+</script>

@@ -4,10 +4,9 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-	root: 'src/extension',
 	build: {
 		emptyOutDir: true,
-		outDir: '../../dist/',
+		outDir: '../dist/extension/',
 		rollupOptions: {
 			output: {
 				globals: {
@@ -21,13 +20,13 @@ export default defineConfig({
 		vue(),
 		viteStaticCopy({
 			targets: [{
-				src: resolve(__dirname, 'src/extension/manifest.json'),
+				src: resolve(__dirname, 'manifest.json'),
 				dest: './'
 			}, {
-				src: resolve(__dirname, 'src/extension/background.js'),
+				src: resolve(__dirname, 'background.js'),
 				dest: './'
 			}, {
-				src: resolve(__dirname, 'src/nodes/icons/google-assistant.png'),
+				src: resolve(__dirname, '../nodes/icons/google-assistant.png'),
 				dest: './'
 			}]
 		})

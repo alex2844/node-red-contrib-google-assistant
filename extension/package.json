@@ -1,0 +1,15 @@
+{
+	"name": "node-red-contrib-google-assistant",
+	"version": "0.1.1",
+	"scripts": {
+		"build": "vite build",
+		"start": "vite build --watch"
+	},
+	"devDependencies": {
+		"@mdi/font": "^7.4.47",
+		"@vitejs/plugin-vue": "^4.5.0",
+		"vite": "^5.0.12",
+		"vite-plugin-static-copy": "^1.0.3",
+		"vuetify": "^3.5.14"
+	}
+}
